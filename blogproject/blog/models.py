@@ -1,5 +1,6 @@
 from django.db import models
 
+from DjangoUeditor.models import UEditorField
 from django.contrib.auth.models import User
 
 from django.urls import reverse
@@ -43,7 +44,9 @@ class Post(models.Model):
 
     # 文章正文，我们使用了 TextField。
     # 存储比较短的字符串可以使用 CharField，但对于文章的正文来说可能会是一大段文本，因此使用 TextField 来存储大段文本。
-    body = models.TextField()
+    # body = models.TextField()
+    body = UEditorField(u'内容',width=1000, height=300, toolbars="full", imagePath="uploads/blog/images/", filePath="uploads/blog/files/", upload_settings={"imageMaxSize":1204000},
+            settings={},command=None,blank=True)
 
     # 这两个列分别表示文章的创建时间和最后一次修改时间，存储时间的字段用 DateTimeField 类型。
     created_time = models.DateTimeField()
